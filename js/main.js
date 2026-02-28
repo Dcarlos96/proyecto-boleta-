@@ -54,3 +54,31 @@ function eliminarProducto(boton, subtotal) {
     document.getElementById("totalGeneral").textContent = total.toFixed(2);
     boton.parentElement.parentElement.remove();
 }
+
+window.onbeforeprint = function () {
+
+    const printArea = document.querySelector(".print-area");
+    const original = document.querySelector(".container");
+
+    // Clonamos la boleta completa
+    const copia = original.cloneNode(true);
+
+    copia.style.marginTop = "40px";
+    copia.style.borderTop = "2px dashed black";
+
+    printArea.appendChild(copia);
+};
+
+window.onafterprint = function () {
+    location.reload();
+};
+
+
+window.onafterprint = function () {
+    location.reload();
+};
+
+document.addEventListener("DOMContentLoaded", function () {
+    const numero = Math.floor(1000 + Math.random() * 9000);
+    document.getElementById("numeroRemito").textContent = "Remito N° " + numero;
+});
