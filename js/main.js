@@ -32,8 +32,8 @@ function agregarProducto() {
     fila.innerHTML = `
         <td>${producto}</td>
         <td>${cantidad}</td>
-        <td>$${precio.toFixed(2)}</td>
-        <td>$${subtotal.toFixed(2)}</td>
+        <td>$${precio}</td>
+        <td>$${subtotal}</td>
         <td class="no-print">
             <button class="no-print" onclick="eliminarProducto(this, ${subtotal})">X</button>
         </td>
@@ -42,7 +42,7 @@ function agregarProducto() {
 
     tabla.appendChild(fila);
 
-    document.getElementById("totalGeneral").textContent = total.toFixed(2);
+    document.getElementById("totalGeneral").textContent = total;
 
     document.getElementById("producto").value = "";
     document.getElementById("cantidad").value = "";
