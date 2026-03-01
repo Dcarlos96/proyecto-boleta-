@@ -11,7 +11,9 @@
     
 
     <div class="container">
-        <div class="remito-info">
+        <div class="remito-info" >
+            <span> Fecha: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp; </span>
+            
             <span id="numeroRemito"></span>
         </div>
         <h1>Lavadero </h1>
@@ -42,8 +44,17 @@
             <tbody id="tablaProductos"></tbody>
         </table>
     
-        <div class="total">
-            Total: $<span id="totalGeneral">0.00</span>
+        <div class="total-row">
+
+            <div class="firmas">
+                <div class="firma">Firma: _____________________</div>
+                <div class="firma">Firma del Cliente: _____________________</div>
+            </div>
+
+            <div class="total">
+                Total: $<span id="totalGeneral">0.00</span>
+            </div>
+
         </div>
     
         <button class="btn-print" onclick="window.print()">Imprimir Boleta</button>
