@@ -60,13 +60,18 @@ window.onbeforeprint = function () {
     const printArea = document.querySelector(".print-area");
     const original = document.querySelector(".container");
 
-    // Clonamos la boleta completa
-    const copia = original.cloneNode(true);
+    const copia = document.createElement("div");
+    copia.className = "container";
+    copia.innerHTML = original.innerHTML; // duplicamos el contenido real
 
     copia.style.marginTop = "40px";
     copia.style.borderTop = "2px dashed black";
 
     printArea.appendChild(copia);
+};
+
+window.onafterprint = function () {
+    location.reload();
 };
 
 window.onafterprint = function () {
