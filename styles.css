@@ -193,3 +193,28 @@ th {
     }
 
 }
+
+.copia{
+margin-top:30px;
+border-top:2px dashed black;
+padding-top:20px;
+}
+
+/* IMPRESION */
+@media print{
+
+button,
+.form-group,
+.no-print{
+display:none !important;
+}
+
+.container{
+width:100%;
+max-width:100%;
+border:2px solid black;
+box-shadow:none;
+margin-bottom:25px;
+}
+
+}
