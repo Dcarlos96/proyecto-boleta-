@@ -1,115 +1,141 @@
+let productos = [];
 let total = 0;
+let numeroRemito = Math.floor(1000 + Math.random() * 9000);
 
-function agregarNombre(){
+/* ================= CLIENTE ================= */
 
-const nombre = document.getElementById("name").value;
+function agregarNombre() {
 
-if(nombre.trim()===""){
-alert("Ingrese el nombre del cliente");
-return;
+    const nombre = document.getElementById("name").value;
+
+    if (nombre.trim() === "") {
+        alert("Ingrese el nombre del cliente");
+        return;
+    }
+
+    document.querySelectorAll(".cliente").forEach(el => {
+        el.textContent = "Cliente: " + nombre;
+    });
+
+    document.getElementById("name").value = "";
 }
 
-document.querySelectorAll(".cliente").forEach(el=>{
-el.textContent="Cliente: "+nombre;
-});
+/* ================= PRODUCTOS ================= */
 
+function agregarProducto() {
+
+    const producto = document.getElementById("producto").value;
+    const cantidad = parseFloat(document.getElementById("cantidad").value);
+    const precio = parseFloat(document.getElementById("precio").value);
+
+    if (!producto || cantidad <= 0 || precio < 0) {
+        alert("Complete correctamente los campos");
+        return;
+    }
+
+    const subtotal = cantidad * precio;
+
+    const item = {
+        producto,
+        cantidad,
+        precio,
+        subtotal
+    };
+
+    productos.push(item);
+
+    renderTabla();
+
+    document.getElementById("producto").value = "";
+    document.getElementById("cantidad").value = "";
+    document.getElementById("precio").value = "";
 }
 
-function agregarProducto(){
+/* ================= RENDER TABLAS ================= */
 
-const producto=document.getElementById("producto").value;
-const cantidad=parseFloat(document.getElementById("cantidad").value);
-const precio=parseFloat(document.getElementById("precio").value);
+function renderTabla() {
 
-if(!producto || cantidad<=0 || precio<0){
-alert("Complete correctamente los campos");
-return;
+    const tabla1 = document.getElementById("tablaProductos1");
+    const tabla2 = document.getElementById("tablaProductos2");
+
+    tabla1.innerHTML = "";
+    tabla2.innerHTML = "";
+
+    total = 0;
+
+    productos.forEach((item, index) => {
+
+        total += item.subtotal;
+
+        /* BOLETA 1 */
+
+        const fila1 = document.createElement("tr");
+
+        fila1.innerHTML = `
+            <td>${item.producto}</td>
+            <td>${item.cantidad}</td>
+            <td>$${item.precio}</td>
+            <td>$${item.subtotal}</td>
+            <td class="no-print">
+                <button onclick="eliminarProducto(${index})">X</button>
+            </td>
+        `;
+
+        tabla1.appendChild(fila1);
+
+        /* BOLETA 2 (COPIA) */
+
+        const fila2 = document.createElement("tr");
+
+        fila2.innerHTML = `
+            <td>${item.producto}</td>
+            <td>${item.cantidad}</td>
+            <td>$${item.precio}</td>
+            <td>$${item.subtotal}</td>
+        `;
+
+        tabla2.appendChild(fila2);
+
+    });
+
+    document.querySelectorAll(".totalGeneral").forEach(el => {
+        el.textContent = total;
+    });
 }
 
-const subtotal=cantidad*precio;
-total+=subtotal;
+/* ================= ELIMINAR ================= */
 
-const fila1=document.createElement("tr");
+function eliminarProducto(index) {
 
-fila1.innerHTML=`
-<td>${producto}</td>
-<td>${cantidad}</td>
-<td>$${precio}</td>
-<td>$${subtotal}</td>
-<td class="no-print">
-<button onclick="eliminarProducto(this,${subtotal})">X</button>
-</td>
-`;
-
-document.getElementById("tablaProductos1").appendChild(fila1);
-
-
-/* COPIA */
-
-const fila2=document.createElement("tr");
-
-fila2.innerHTML=`
-<td>${producto}</td>
-<td>${cantidad}</td>
-<td>$${precio}</td>
-<td>$${subtotal}</td>
-`;
-
-document.getElementById("tablaProductos2").appendChild(fila2);
-
-
-/* TOTAL */
-
-document.querySelectorAll(".totalGeneral").forEach(el=>{
-el.textContent=total;
-});
-
-
-document.getElementById("producto").value="";
-document.getElementById("cantidad").value="";
-document.getElementById("precio").value="";
-
+    productos.splice(index, 1);
+    renderTabla();
 }
 
+/* ================= REMITO ================= */
 
-function eliminarProducto(boton,subtotal){
+document.addEventListener("DOMContentLoaded", function(){
 
-total-=subtotal;
-
-document.querySelectorAll(".totalGeneral").forEach(el=>{
-el.textContent=total;
-});
-
-boton.parentElement.parentElement.remove();
-
-}
-
-
-/* REMITO */
-
-document.addEventListener("DOMContentLoaded",function(){
-
-const numero=Math.floor(1000+Math.random()*9000);
-
-document.querySelectorAll(".numeroRemito").forEach(el=>{
-el.textContent="Remito N° "+numero;
-});
+    document.querySelectorAll(".numeroRemito").forEach(el => {
+        el.textContent = "Remito N° " + numeroRemito;
+    });
 
 });
 
+/* ================= FECHA ================= */
 
-/* FECHA AUTOMATICA */
+window.addEventListener("beforeprint", function(){
 
-window.onbeforeprint=function(){
+    const hoy = new Date();
 
-const hoy=new Date();
+    const fecha =
+        hoy.getDate() + " / " +
+        (hoy.getMonth() + 1) + " / " +
+        hoy.getFullYear() + " - " +
+        hoy.getHours() + ":" +
+        hoy.getMinutes();
 
-const fecha=
-String(hoy.getDate()).padStart(2,'0')+" / "+
-String(hoy.getMonth()+1).padStart(2,'0')+" / "+
-hoy.getFullYear();
+    document.querySelectorAll(".fechaActual").forEach(el=>{
+        el.textContent = fecha;
+    });
 
-document.getElementById("fecha1").textContent="Fecha: "+fecha;
-document.getElementById("fecha2").textContent="Fecha: "+fecha;
-
-};
+});

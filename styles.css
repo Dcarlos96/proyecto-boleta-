@@ -111,110 +111,44 @@ th {
 
 @media print {
 
-    * {
-        box-sizing: border-box;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-    }
-
-    body {
-        margin: 0;
-        padding: 0;
-        background: white;
+    body{
+        margin:0;
+        background:white;
     }
 
     button,
     .form-group,
-    .no-print,
-    .btn-print {
-        display: none !important;
+    .no-print{
+        display:none !important;
     }
 
-    .print-area {
-        width: 100%;
+    .print-area{
+        width:100%;
     }
 
-    .container {
-        width: 100%;
-        max-width: 100%;
-        padding: 15px;
-        border: 2px solid black;
-        border-radius: 0;
-        box-shadow: none;
-        margin-bottom: 30px; /* espacio entre las dos copias */
-        page-break-inside: avoid;
+    .container{
+
+        width:100%;
+        max-width:100%;
+        border:2px solid black;
+        padding:15px;
+        box-shadow:none;
+        border-radius:0;
+
+        /* CLAVE PARA QUE IMPRIMA LAS DOS */
+        display:block;
+        page-break-inside:avoid;
+        margin-bottom:20px;
     }
 
-    h1 {
-        text-align: center;
+    /* fuerza que entren dos boletas en la hoja */
+
+    .container:first-child{
+        height:48%;
     }
 
-    .img {
-        width: 60px;
-        height: 60px;
+    .container:last-child{
+        height:48%;
     }
-
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 15px;
-    }
-
-    th, td {
-        border: 1px solid #000;
-        padding: 8px;
-        text-align: center;
-    }
-
-    th {
-        background: #00aeff !important;
-        color: white !important;
-    }
-
-    .total-row {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-top: 25px;
-    }
-
-    .firmas {
-        display: flex;
-        gap: 40px;
-    }
-
-    .firma {
-        font-size: 14px;
-    }
-
-    .total {
-        font-size: 18px;
-        font-weight: bold;
-    }
-
-}
-
-.copia{
-margin-top:30px;
-border-top:2px dashed black;
-padding-top:20px;
-}
-
-/* IMPRESION */
-@media print{
-
-button,
-.form-group,
-.no-print{
-display:none !important;
-}
-
-.container{
-width:100%;
-max-width:100%;
-border:2px solid black;
-box-shadow:none;
-margin-bottom:25px;
-}
 
 }
