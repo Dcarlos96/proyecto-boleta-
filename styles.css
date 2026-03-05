@@ -97,7 +97,9 @@ th {
     margin-top: 15px;
 }
 
-
+.copia {
+    display: none;
+}
 /* ===================== */
 /*        IMPRESIÓN      */
 /* ===================== */
@@ -118,12 +120,20 @@ th {
         background: white;
     }
 
+    /* Ocultar botones y formulario */
     button,
     .form-group,
+    .btn-print,
     .no-print {
         display: none !important;
     }
 
+    /* Mostrar las dos copias */
+    .copia {
+        display: block !important;
+    }
+
+    /* Estilo de cada boleta */
     .container {
         width: 100%;
         max-width: 100%;
@@ -131,9 +141,8 @@ th {
         border: 2px solid black;
         border-radius: 0;
         box-shadow: none;
-        margin-bottom: 25px; /* espacio entre copias */
+        margin-bottom: 25px; /* separación entre copias */
+        page-break-inside: avoid;
     }
 
 }
-
-

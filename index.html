@@ -7,30 +7,33 @@
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<div class="print-area">
-    
 
+<div class="print-area">
+
+    <!-- ================= COPIA 1 ================= -->
     <div class="container">
-        <div class="remito-info" >
-            <span> Fecha: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp; </span>
-            
+        
+        <div class="remito-info">
+            <span>Fecha: ____ / ____ / ____</span>
             <span id="numeroRemito"></span>
         </div>
+
         <h1>Lavadero <img src="icons/burbujas3.jpg" alt="" class="img"></h1>
+
         <h3 id="clienteMostrado">Cliente: </h3>
-        <div class="form-group">
+
+        <div class="form-group no-print">
             <input type="text" id="name" placeholder="Ingrese el Nombre del cliente">
             <button onclick="agregarNombre()">Agregar</button>
         </div>
-    
-        <div class="form-group" style="flex-wrap: wrap;">
+
+        <div class="form-group no-print" style="flex-wrap: wrap;">
             <input type="text" id="producto" placeholder="Nombre del producto">
             <input type="number" id="cantidad" placeholder="Cantidad" min="1">
             <input type="number" id="precio" placeholder="Precio Unitario" min="0" step="0.01">
             <button onclick="agregarProducto()">Agregar</button>
         </div>
-        
-    
+
         <table>
             <thead>
                 <tr>
@@ -43,9 +46,8 @@
             </thead>
             <tbody id="tablaProductos"></tbody>
         </table>
-    
-        <div class="total-row">
 
+        <div class="total-row">
             <div class="firmas">
                 <div class="firma">Firma: _____________________</div>
                 <div class="firma">Firma del Cliente: _____________________</div>
@@ -54,11 +56,49 @@
             <div class="total">
                 Total: $<span id="totalGeneral">0.00</span>
             </div>
-
         </div>
-    
-        <button class="btn-print" onclick="window.print()">Imprimir Boleta</button>
+
+        <button class="btn-print no-print" onclick="window.print()">Imprimir Boleta</button>
+
     </div>
+
+    <!-- ================= COPIA 2 ================= -->
+    <div class="container copia">
+
+        <div class="remito-info">
+            <span>Fecha: ____ / ____ / ____</span>
+            <span id="numeroRemitoCopia"></span>
+        </div>
+
+        <h1>Lavadero <img src="icons/burbujas3.jpg" alt="" class="img"></h1>
+
+        <h3 id="clienteMostradoCopia">Cliente: </h3>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unitario</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody id="tablaProductosCopia"></tbody>
+        </table>
+
+        <div class="total-row">
+            <div class="firmas">
+                <div class="firma">Firma: _____________________</div>
+                <div class="firma">Firma del Cliente: _____________________</div>
+            </div>
+
+            <div class="total">
+                Total: $<span id="totalGeneralCopia">0.00</span>
+            </div>
+        </div>
+
+    </div>
+
 </div>
 
 <script src="js/main.js"></script>

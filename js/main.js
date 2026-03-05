@@ -9,6 +9,8 @@ function agregarNombre() {
     }
 
     document.getElementById("clienteMostrado").textContent = "Cliente: " + nombre;
+    document.getElementById("clienteMostradoCopia").textContent = "Cliente: " + nombre;
+
     document.getElementById("name").value = "";
 }
 
@@ -25,24 +27,31 @@ function agregarProducto() {
     const subtotal = cantidad * precio;
     total += subtotal;
 
-    const tabla = document.getElementById("tablaProductos");
-
+    // BOLETA PRINCIPAL
     const fila = document.createElement("tr");
-
     fila.innerHTML = `
         <td>${producto}</td>
         <td>${cantidad}</td>
-        <td>$${precio}</td>
-        <td>$${subtotal}</td>
+        <td>$${precio.toFixed(2)}</td>
+        <td>$${subtotal.toFixed(2)}</td>
         <td class="no-print">
-            <button class="no-print" onclick="eliminarProducto(this, ${subtotal})">X</button>
+            <button onclick="eliminarProducto(this, ${subtotal})">X</button>
         </td>
-
     `;
+    document.getElementById("tablaProductos").appendChild(fila);
 
-    tabla.appendChild(fila);
+    // COPIA
+    const filaCopia = document.createElement("tr");
+    filaCopia.innerHTML = `
+        <td>${producto}</td>
+        <td>${cantidad}</td>
+        <td>$${precio.toFixed(2)}</td>
+        <td>$${subtotal.toFixed(2)}</td>
+    `;
+    document.getElementById("tablaProductosCopia").appendChild(filaCopia);
 
-    document.getElementById("totalGeneral").textContent = total;
+    document.getElementById("totalGeneral").textContent = total.toFixed(2);
+    document.getElementById("totalGeneralCopia").textContent = total.toFixed(2);
 
     document.getElementById("producto").value = "";
     document.getElementById("cantidad").value = "";
@@ -51,39 +60,20 @@ function agregarProducto() {
 
 function eliminarProducto(boton, subtotal) {
     total -= subtotal;
-    document.getElementById("totalGeneral").textContent = total.toFixed(2);
+
+    const index = [...boton.parentElement.parentElement.parentElement.children]
+        .indexOf(boton.parentElement.parentElement);
+
     boton.parentElement.parentElement.remove();
+    document.getElementById("tablaProductosCopia").children[index].remove();
+
+    document.getElementById("totalGeneral").textContent = total.toFixed(2);
+    document.getElementById("totalGeneralCopia").textContent = total.toFixed(2);
 }
-
-window.onbeforeprint = function () {
-
-    const printArea = document.querySelector(".print-area");
-    const original = document.querySelector(".container");
-
-    const copia = document.createElement("div");
-    copia.className = "container";
-    copia.innerHTML = original.innerHTML; // duplicamos el contenido real
-
-    copia.style.marginTop = "40px";
-    copia.style.borderTop = "2px dashed black";
-
-    printArea.appendChild(copia);
-};
-
-window.onafterprint = function () {
-    location.reload();
-};
-
-window.onafterprint = function () {
-    location.reload();
-};
-
-
-window.onafterprint = function () {
-    location.reload();
-};
 
 document.addEventListener("DOMContentLoaded", function () {
     const numero = Math.floor(1000 + Math.random() * 9000);
+
     document.getElementById("numeroRemito").textContent = "Remito N° " + numero;
+    document.getElementById("numeroRemitoCopia").textContent = "Remito N° " + numero;
 });
