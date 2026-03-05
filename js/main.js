@@ -57,6 +57,26 @@ function agregarProducto() {
     document.getElementById("cantidad").value = "";
     document.getElementById("precio").value = "";
 }
+function generarFecha() {
+
+    const hoy = new Date();
+
+    const dia = String(hoy.getDate()).padStart(2, "0");
+    const mes = String(hoy.getMonth() + 1).padStart(2, "0");
+    const anio = hoy.getFullYear();
+
+    const fecha = dia + " / " + mes + " / " + anio;
+
+    const fechas = document.querySelectorAll(".fechaActual");
+
+    fechas.forEach(el => {
+        el.textContent = fecha;
+    });
+
+}
+window.onbeforeprint = function () {
+    generarFecha();
+};
 
 function eliminarProducto(boton, subtotal) {
     total -= subtotal;
